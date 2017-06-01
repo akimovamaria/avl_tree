@@ -87,6 +87,12 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return list.toArray();
     }
 
+
+    /**
+     * Возвращает список с элементами дерева в порядке возрастания
+     * @param curr колличество элементов дерева
+     * @param list
+     */
     private void inorderTraverse(Node curr, List<E> list) {
         if (curr == null) {
             return;
@@ -108,6 +114,11 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return null;
     }
 
+    /**
+     * Поиск элемента по дереву
+     * @param value значение искомого элемента
+     * @return {@code true} если текущий элемент равен искомому
+     */
     private boolean contains(E value) {
         if (value == null) {
             throw new NullPointerException("Значение равно null");
@@ -132,6 +143,11 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return false;
     }
 
+    /**
+     * Добавление элемента в дерево
+     * @param value значение добавляемого элемента
+     * @return {@code false} при  попытке добавления нулевого объекта
+     */
     @Override
     public boolean add(E value) {
         if (root == null)
@@ -164,12 +180,24 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return true;
     }
 
+
+    /**
+     * Проверка на наличие определенного объекта
+     * @param o проверяемый объект
+     * @return {@code true} если объект найден
+     */
     @Override
     public boolean remove(Object o) {
         E value = (E) o;
         return remove(value);
     }
 
+
+    /**
+     * Проверяет каждый элемент коллекции, есть ли он в дереве
+     * @param c параметр коллекции
+     * @return {@code true} если объект найдем
+     */
     @Override
     public boolean containsAll(Collection<?> c) {
         Object[] arr = c.toArray();
@@ -180,6 +208,11 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return true;
     }
 
+    /**
+     * Добавляет все элементы коллекции в дерево
+     * @param c элемент коллекции
+     * @return
+     */
     @Override
     @SuppressWarnings("unchecked")
     public boolean addAll(Collection<? extends E> c) {
@@ -192,6 +225,11 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return cTrue != 0;
     }
 
+    /**
+     * Сохраняет новый размер дерева
+     * @param c элемент дерева, который есть в коллекции
+     * @return
+     */
     @Override
     public boolean retainAll(Collection<?> c) {
         Objects.requireNonNull(c);
@@ -210,6 +248,11 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return result != 0;
     }
 
+    /**
+     * Удаляет все элементы коллекции из дерева
+     * @param c
+     * @return
+     */
     @Override
     public boolean removeAll(Collection<?> c) {
         Objects.requireNonNull(c);
@@ -222,11 +265,15 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return cTrue != 0;
     }
 
+    /**
+     * Обнуление корня дерева и его размера
+     */
     @Override
     public void clear() {
         root = null;
         size = 0;
     }
+
 
     private int height(Node n) {
         if (n == null)
@@ -302,6 +349,10 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         return rotateLeft(n);
     }
 
+    /**
+     * Выполняется балансировка дерева, при удалении или добавлении элемента
+     * @param n узел, в котором выполняется балансировка
+     */
     private void rebalance(Node n) {
         setBalance(n);
 
@@ -325,6 +376,11 @@ public class AVLTree<E extends Comparable<E>> implements Set<E> {
         }
     }
 
+    /**
+     * Удаляет объект из дерева
+     * @param value значение удаляемого объекта
+     * @return {@code true} если объект найден, то он удаляется
+     */
     private boolean remove(E value) {
         if (root == null)
             return false;
